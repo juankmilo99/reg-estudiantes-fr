@@ -1,0 +1,296 @@
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.registration-form {
+  background: white;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 10px;
+  font-size: 28px;
+}
+
+.subtitle {
+  color: #666;
+  margin-bottom: 30px;
+  font-size: 16px;
+}
+
+.alert {
+  padding: 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.alert-error {
+  background: #fee;
+  border: 1px solid #fcc;
+  color: #c33;
+}
+
+.alert-success {
+  background: #efe;
+  border: 1px solid #cfc;
+  color: #3c3;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px 20px;
+  color: #666;
+  font-size: 16px;
+}
+
+.form-content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.credits-info {
+  background: #f5f5f5;
+  padding: 20px;
+  border-radius: 6px;
+  border-left: 4px solid #007bff;
+}
+
+.credits-info h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 18px;
+}
+
+.credits-info p {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.credit-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.credit-item.total {
+  font-weight: bold;
+  padding-top: 10px;
+  border-top: 1px solid #ddd;
+  color: #007bff;
+}
+
+.credit-item .label {
+  color: #666;
+}
+
+.credit-item .value {
+  color: #333;
+  font-weight: 500;
+}
+
+.materias-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.materias-section h3 {
+  margin: 0;
+  color: #333;
+  font-size: 18px;
+}
+
+.info-text {
+  color: #666;
+  font-size: 14px;
+  margin: 0;
+  padding: 10px;
+  background: #f9f9f9;
+  border-radius: 4px;
+}
+
+.materias-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.materia-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  background: white;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.materia-card:hover {
+  border-color: #007bff;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.1);
+}
+
+.materia-card.selected {
+  border-color: #007bff;
+  background: #f0f7ff;
+}
+
+.materia-card input[type="checkbox"] {
+  margin-top: 4px;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+
+.materia-card input[type="checkbox"]:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.materia-label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  cursor: pointer;
+}
+
+.materia-nombre {
+  font-weight: 600;
+  color: #333;
+  font-size: 16px;
+}
+
+.materia-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.creditos {
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.creditos::before {
+  content: "📚";
+  font-size: 14px;
+}
+
+.profesor {
+  color: #888;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.profesor::before {
+  content: "👨‍🏫";
+  font-size: 14px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  background: #f9f9f9;
+  border-radius: 6px;
+}
+
+.empty-state p {
+  color: #666;
+  margin: 0;
+  font-size: 16px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: flex-end;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary {
+  background: #007bff;
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #0056b3;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.btn-primary:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: white;
+  text-decoration: none;
+}
+
+.btn-secondary:hover {
+  background: #5a6268;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+}
+
+@media (max-width: 768px) {
+  .registration-form {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .materias-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+  }
+
+  .credits-info p {
+    font-size: 13px;
+  }
+}

@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="registration-form">
+    <h1>Registro de Estudiante</h1>
+    <p class="subtitle">Completa el formulario y selecciona tus materias</p>
+
+    <div *ngIf="error()" class="alert alert-error">
+      {{ error() }}
+    </div>
+
+    <div *ngIf="exito()" class="alert alert-success">
+      ¡Registro exitoso! Redirigiendo...
+    </div>
+
+    <form [formGroup]="formulario" (ngSubmit)="registrar()" *ngIf="!exito()">
+      <div class="form-group">
+        <label for="nombre">Nombre Completo *</label>
+        <input
+          type="text"
+          id="nombre"
+          formControlName="nombre"
+          class="form-control"
+          placeholder="Juan Pérez"
+        />
+        <div *ngIf="formulario.get('nombre')?.invalid && formulario.get('nombre')?.touched" class="error-text">
+          El nombre debe tener al menos 3 caracteres
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="form-control"
+          placeholder="juan@example.com"
+        />
+        <div *ngIf="formulario.get('email')?.invalid && formulario.get('email')?.touched" class="error-text">
+          Ingresa un email válido
+        </div>
+      </div>
+
+      <div class="materias-section">
+        <h3>Selecciona tus Materias (Máximo {{ maxMaterias }})</h3>
+        <p class="info-text">
+          Cada materia equivale a {{ creditosPorMateria }} créditos. Total: {{ materiasSeleccionadas().length * creditosPorMateria }} / 9 créditos
+        </p>
+
+        <div *ngIf="cargando()" class="loading">
+          Cargando materias...
+        </div>
+
+        <div *ngIf="!cargando()" class="materias-grid">
+          <div *ngFor="let materia of materias()" class="materia-card" [class.selected]="estaSeleccionada(materia.id)">
+            <input
+              type="checkbox"
+              [id]="'materia-' + materia.id"
+              [checked]="estaSeleccionada(materia.id)"
+              (change)="toggleMateria(materia.id)"
+              [disabled]="!estaSeleccionada(materia.id) && materiasSeleccionadas().length >= maxMaterias"
+            />
+            <label [for]="'materia-' + materia.id" class="materia-label">
+              <span class="materia-nombre">{{ materia.nombre }}</span>
+              <span class="materia-info">
+                <span class="creditos">{{ creditosPorMateria }} créditos</span>
+                <span class="profesor">Profesor: {{ materia.profesor.nombre }}</span>
+              </span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <a href="/estudiantes" class="btn-secondary">Cancelar</a>
+        <button
+          type="submit"
+          class="btn-primary"
+          [disabled]="enviando() || !formulario.valid || materiasSeleccionadas().length === 0"
+        >
+          {{ enviando() ? 'Registrando...' : 'Registrar' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

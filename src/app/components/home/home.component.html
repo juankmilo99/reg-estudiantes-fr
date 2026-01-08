@@ -1,0 +1,88 @@
+<div class="container">
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Sistema de Registro de Estudiantes</h1>
+      <p>Regístrate en línea y adhiérete a nuestro programa de créditos académicos</p>
+      <a href="/registro" class="btn-primary btn-large">Registrarse Ahora</a>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="stat-card">
+      <span class="stat-number">10</span>
+      <span class="stat-label">Materias Disponibles</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Profesores Calificados</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number">3</span>
+      <span class="stat-label">Máx. Materias/Estudiante</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number">9</span>
+      <span class="stat-label">Créditos Totales</span>
+    </div>
+  </section>
+
+  <section class="features">
+    <h2>¿Cómo funciona?</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">1</div>
+        <h3>Crea tu Cuenta</h3>
+        <p>Completa el registro con tu nombre y email</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">2</div>
+        <h3>Selecciona Materias</h3>
+        <p>Elige hasta 3 materias (9 créditos totales)</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">3</div>
+        <h3>Valida Profesores</h3>
+        <p>No puedes tener el mismo profesor en 2 materias</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">4</div>
+        <h3>Comienza a Estudiar</h3>
+        <p>Ve tus compañeros de clase y otros estudiantes</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="info">
+    <h2>Información del Programa</h2>
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>Materias</h3>
+        <p *ngIf="cargando()" class="loading-text">Cargando...</p>
+        <ul *ngIf="!cargando() && materias().length > 0" class="list">
+          <li *ngFor="let materia of materias()" class="list-item">
+            <strong>{{ materia.nombre }}</strong> - 3 créditos
+          </li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>Profesores</h3>
+        <p *ngIf="cargando()" class="loading-text">Cargando...</p>
+        <ul *ngIf="!cargando() && profesores().length > 0" class="list">
+          <li *ngFor="let profesor of profesores()" class="list-item">
+            <strong>{{ profesor.nombre }}</strong>
+            <span class="materias-count">(2 materias)</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>¿Listo para comenzar?</h2>
+    <p>Únete a cientos de estudiantes que ya forman parte de nuestro programa</p>
+    <div class="cta-buttons">
+      <a href="/registro" class="btn-primary">Registrarse</a>
+      <a href="/estudiantes" class="btn-secondary">Ver Estudiantes</a>
+    </div>
+  </section>
+</div>

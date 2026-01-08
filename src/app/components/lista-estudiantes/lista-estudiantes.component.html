@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="header">
+    <h1>Estudiantes Registrados</h1>
+    <a href="/registro" class="btn-primary">+ Nuevo Estudiante</a>
+  </div>
+
+  <div *ngIf="error()" class="alert alert-error">
+    {{ error() }}
+    <button (click)="cargarEstudiantes()" class="btn-secondary">Reintentar</button>
+  </div>
+
+  <div *ngIf="cargando()" class="loading">
+    Cargando estudiantes...
+  </div>
+
+  <div *ngIf="!cargando() && estudiantes().length === 0" class="empty-state">
+    <p>No hay estudiantes registrados aún.</p>
+    <a href="/registro" class="btn-primary">Crear el primer estudiante</a>
+  </div>
+
+  <div *ngIf="!cargando() && estudiantes().length > 0" class="students-grid">
+    <div *ngFor="let estudiante of estudiantes()" class="student-card">
+      <div class="student-header">
+        <h3>{{ estudiante.nombre }}</h3>
+        <a [routerLink]="['/estudiante', estudiante.id]" class="btn-link">Ver detalles</a>
+      </div>
+      <p class="email">{{ estudiante.email }}</p>
+      <p class="credits">Créditos: {{ obtenerCreditosTotales(estudiante) }} / 9</p>
+    </div>
+  </div>
+</div>

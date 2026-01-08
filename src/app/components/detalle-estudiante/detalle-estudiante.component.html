@@ -1,0 +1,71 @@
+<div class="container">
+  <div *ngIf="error()" class="alert alert-error">
+    {{ error() }}
+    <a href="/estudiantes" class="btn-secondary">Volver a estudiantes</a>
+  </div>
+
+  <div *ngIf="cargando()" class="loading">
+    Cargando datos...
+  </div>
+
+  <div *ngIf="!cargando() && estudiante()" class="estudiante-detail">
+    <div class="header">
+      <div class="info">
+        <h1>{{ estudiante()!.nombre }}</h1>
+        <p class="email">{{ estudiante()!.email }}</p>
+        <p class="credits">Créditos totales: {{ estudiante()!.creditosTotales }} / 9</p>
+      </div>
+      <a href="/estudiantes" class="btn-secondary">← Volver</a>
+    </div>
+
+    <div class="content">
+      <div class="section">
+        <h2>Mis Materias ({{ inscripciones().length }})</h2>
+
+        <div *ngIf="inscripciones().length === 0" class="empty-state">
+          <p>No estás inscrito en ninguna materia.</p>
+          <a href="/inscribir" class="btn-primary">Buscar materias</a>
+        </div>
+
+        <div *ngIf="inscripciones().length > 0" class="materias-list">
+          <div *ngFor="let materia of inscripciones()" class="materia-item">
+            <div class="materia-header">
+              <h3>{{ materia.nombre }}</h3>
+              <button (click)="desinscribirse(materia.id)" class="btn-danger">Desinscribirse</button>
+            </div>
+            <p class="materia-info">
+              <span class="badge">{{ materia.creditos }} créditos</span>
+              <span class="profesor">Profesor: {{ materia.profesor.nombre }}</span>
+            </p>
+
+            <div class="companeros">
+              <h4>Compañeros de clase:</h4>
+              <div class="companeros-list">
+                <div *ngFor="let companero of obtenerCompanerosMateria(materia.id)" class="companero-item">
+                  {{ companero.nombre }}
+                </div>
+                <div *ngIf="obtenerCompanerosMateria(materia.id).length === 0" class="empty">
+                  Aún no hay otros compañeros en esta clase
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="inscripciones().length > 0 && inscripciones().length < 3" class="complete-credits-section">
+          <p class="info-text">
+            Has completado {{ inscripciones().length * 3 }} de 9 créditos. Completa tu registro inscribiéndote en más materias.
+          </p>
+          <button (click)="irAInscribirse()" class="btn-primary">Agregar más materias</button>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Otros Estudiantes</h2>
+        <div class="otros-estudiantes">
+          <a href="/estudiantes" class="btn-link">Ver todos los estudiantes registrados</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,80 @@
+<div class="container">
+  <div class="registration-form">
+    <h1>Agregar Más Materias</h1>
+    <p class="subtitle">Completa tus 9 créditos seleccionando más materias</p>
+
+    <div *ngIf="error()" class="alert alert-error">
+      {{ error() }}
+    </div>
+
+    <div *ngIf="exito()" class="alert alert-success">
+      ¡Materias agregadas exitosamente! Redirigiendo...
+    </div>
+
+    <div *ngIf="cargando()" class="loading">
+      Cargando materias...
+    </div>
+
+    <div *ngIf="!cargando() && !exito()" class="form-content">
+      <div class="credits-info">
+        <h3>Estado de Créditos</h3>
+        <p>
+          <span class="credit-item">
+            <span class="label">Créditos actuales:</span>
+            <span class="value">{{ obtenerCreditosActuales() }} / 9</span>
+          </span>
+          <span class="credit-item">
+            <span class="label">Créditos a agregar:</span>
+            <span class="value">{{ obtenerCreditosSeleccionados() }}</span>
+          </span>
+          <span class="credit-item total">
+            <span class="label">Total:</span>
+            <span class="value">{{ obtenerCreditosTotales() }} / 9</span>
+          </span>
+        </p>
+      </div>
+
+      <div class="materias-section">
+        <h3>Materias Disponibles</h3>
+        <p class="info-text">
+          Puedes agregar hasta {{ creditosTotalesMax - obtenerCreditosActuales() }} créditos más.
+        </p>
+
+        <div class="materias-grid">
+          <div *ngFor="let materia of obtenerMateriasDisponibles()" class="materia-card" [class.selected]="estaSeleccionada(materia.id)">
+            <input
+              type="checkbox"
+              [id]="'materia-' + materia.id"
+              [checked]="estaSeleccionada(materia.id)"
+              (change)="toggleMateria(materia.id)"
+              [disabled]="!estaSeleccionada(materia.id) && obtenerCreditosTotales() >= creditosTotalesMax"
+            />
+            <label [for]="'materia-' + materia.id" class="materia-label">
+              <span class="materia-nombre">{{ materia.nombre }}</span>
+              <span class="materia-info">
+                <span class="creditos">{{ creditosPorMateria }} créditos</span>
+                <span class="profesor">Profesor: {{ materia.profesor.nombre }}</span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div *ngIf="obtenerMateriasDisponibles().length === 0" class="empty-state">
+          <p>Ya estás inscrito en todas las materias disponibles.</p>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <a href="/estudiante/{{ estudianteId }}" class="btn-secondary">Cancelar</a>
+        <button
+          type="button"
+          class="btn-primary"
+          (click)="agregarMaterias()"
+          [disabled]="enviando() || materiasSeleccionadas().length === 0 || obtenerCreditosTotales() > creditosTotalesMax"
+        >
+          {{ enviando() ? 'Agregando...' : 'Agregar Materias' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
