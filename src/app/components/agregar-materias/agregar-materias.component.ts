@@ -46,8 +46,8 @@ export class AgregarMateriasComponent implements OnInit {
   private cargarDatos(): void {
     this.cargando.set(true);
     
-    // Cargar todas las materias
-    this.materiasService.obtenerTodas().subscribe({
+    // Cargar materias disponibles para el estudiante
+    this.materiasService.obtenerDisponibles(this.estudianteId).subscribe({
       next: (datos) => {
         this.materias.set(datos);
         // Cargar materias inscritas del estudiante

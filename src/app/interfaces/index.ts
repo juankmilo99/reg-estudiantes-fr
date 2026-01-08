@@ -14,6 +14,11 @@ export interface Materia {
     id: number;
     nombre: string;
   };
+  periodo: {
+    id: number;
+    nombre: string;
+    activo: boolean;
+  };
 }
 
 export interface Inscripcion {

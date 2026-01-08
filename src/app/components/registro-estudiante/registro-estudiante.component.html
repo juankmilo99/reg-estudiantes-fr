@@ -64,6 +64,7 @@
               <span class="materia-info">
                 <span class="creditos">{{ creditosPorMateria }} créditos</span>
                 <span class="profesor">Profesor: {{ materia.profesor.nombre }}</span>
+                <span class="periodo">Periodo: {{ materia.periodo.nombre }} <span *ngIf="!materia.periodo.activo">(Inactivo)</span></span>
               </span>
             </label>
           </div>
